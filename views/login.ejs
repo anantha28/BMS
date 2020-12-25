@@ -1,17 +1,87 @@
 <html>
     <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</link>
+         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+         
         <title>
             Book Management System
         </title>
+        <style>
+            @media only screen and (min-width: 768px) and (max-device-width : 1023px) {
+                .rs{
+                margin:auto;width: 75%;background:rgba(0,0,0,0.2);border-radius:20px;margin-top:35%;
+                }
+                .rsin{
+                    width:62%;border-radius:25px;size:1em;margin:auto;
+                }
+                .rshead1{
+                    color:#ffffff;font-size:3em
+                }
+                 .rshead2{
+                    color:#ffffff;font-size:2.6em
+                }
+            }
+             @media only screen and (min-width: 300px) and (max-device-width : 767px) {
+                .rs{
+                margin:auto;width: 85%;background:rgba(0,0,0,0.2);border-radius:20px;margin-top:52%;
+                }
+                .rsin{
+                    width:65%;border-radius:25px;margin:auto
+                }
+                .rshead1{
+                    color:#ffffff;font-size:3em
+                }
+                 .rshead2{
+                    color:#ffffff;font-size:2.6em
+                }
+            }
+            @media only screen and (min-width: 1024px) {
+                .rs{
+                margin:auto;width: 45%;background:rgba(0,0,0,0.2);border-radius:20px;margin-top:15%;
+                }
+                .rsin{
+                    width:50%;border-radius:25px;size:1em;margin:auto;
+                }
+                .rshead1{
+                    color:#ffffff;font-size:3em
+                }
+                 .rshead2{
+                    color:#ffffff;font-size:2.6em
+                }
+            }
+            
+            
+        </style>
     </head>
     <body>
-        <h3>BMS</h3>
-        <video autoplay muted loop style="left: 50%;
-  min-height: 100%;
-  min-width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);border:1px solid black">
+         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+        
+        <div class="jumbotron  text-center rs">
+            <p class="rshead1" style="font-size:2.3em"><strong>Book Management System</strong></p>
+             <p class="rshead2" style="font-size:1.9em"><strong>Login</strong></p>
+             <form action="/login" method="POST">
+                 
+                 <div class="form-group"><input type="text" name="username" required placeholder="Username" class="form-control rsin"></div> 
+            <div class="form-group"><input type="text" name="password" required placeholder="Password" class="form-control rsin"></div> 
+             <div class="form-group"><button class="btn btn-info form-control rsin" >Login</button></div>
+             <div class="form-group"><a href="/signup" style="color:#BFD7ED;font-size:1em" >Don't have an Account? Sign Up</a></div>
+       
+             </form>
+        </div>
+            
+        <video autoplay muted loop style="position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;">
          <source src="https://static.videezy.com/system/resources/previews/000/043/846/original/r2.mp4" type="video/mp4">
         </video>
     </body>
