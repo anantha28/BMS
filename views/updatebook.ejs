@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<script src = "https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Bootstrap CSS -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>My Medical Times</title>
+
+    <style>
+    	@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+    	body{
+    	    background-image: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    	}
+*{
+ margin: 0;
+ padding:0; 
+ box-sizing: border-box;
+ font-family: 'Poppins', sans-serif;	
+	
+}	
+.icc{
+ width:35px;height:35px;
+}
+.icc:hover{
+ opacity:0.6;
+}
+
+
+    </style>
+
+  </head>
+  
+  <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+           <a class="navbar-brand" href="/home"><strong>Book Management System</strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/home">Add Book<span class="sr-only">(current)</span></a>
+      </li>
+	  
+    
+	 
+	 <li class="nav-item">
+        <a class="nav-link" href="/maindisease">My Books</a>
+      </li>
+
+	  
+    </ul>
+    <form class="form-inline my-2 my-lg-0 " >
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  
+    </form>
+	
+	<% if(!currentUser){ %>
+            <a class="btn btn-primary" href="/login" role="button">Login</a>
+            <%} else{ %>
+            <a href="/profilenav"  style="color:#ffffff;margin-right:18px"> <%= currentUser.username %></a>
+            <a class="btn btn-info" href="/logout" role="button">Logout</a>
+            
+            <% } %>
+	
+  </div>
+
+        </div>
+ </nav>
+ 
+ <% if(error.length>0){%>
+<div class="alert alert-danger container" style="margin-top:0px;"><%=error%></div>
+<% }if(success.length>0){%>
+<div class="alert alert-success container" style="margin-top:0px;"><%=success%></div>
+<% } %> 
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
+
+
+
+<div class="container" style="margin-top:6%;margin-bottom:8%;border-radius:25px;">
+    
+    <div class="row" >
+         <div class="col-lg-2">
+            
+            </div>
+    <div class="col-lg-9 jumbotron" style=" box-shadow: 10px 9px 14px 0 rgba(0, 0, 0, 0.2), 0 16px 29px 0 rgba(0, 0, 0, 0.19);">
+      
+      <form action="/updatebook/<%= books._id %>?_method=PUT" method="POST">
+     <h3><b>Update Book Details</b></h3>
+   
+    <label for="mainHeading" style="margin-top:27px"><b>Book Title:</b></label>
+    <div class="form-group"><input type="text" id="mainHeading" placeholder="Book Title" name="name" required class="form-control" style="margin-top:2px;" value="<%= books.name %>"></div>
+    <label for="subHeading" style="margin-top:10px"><b>Author:</b></label>
+    <div class="form-group"><input type="text" id="mainHeading" placeholder="Author" name="author" required class="form-control" style="margin-top:2px;" value="<%= books.author %>"></div>
+    <label for="bookPrice" style="margin-top:27px"><b>Book Price:</b></label>
+    <div class="form-group"><input type="number" min="0" id="bookPrice" placeholder="Book Price" name="price" required class="form-control" style="margin-top:2px" value="<%= books.price %>"></div>
+    <label for="publishedOn" style="margin-top:27px"><b>Published On:</b></label>
+    <div class="form-group"><input type="date"  id="publishedOn" placeholder="Published on?" name="published" required class="form-control" style="margin-top:2px;" value="<%= books.published %>"></div>
+   
+    <hr><label for="body" style="margin-top:7px"><b>Book Description:</b></label>
+    <div class="form-group" style="margin-top:10px;"><textarea type="text" id="body" placeholder="Enter the Book Description Here " name="description" required class="form-control" required style="height:180px" ><%= books.description %></textarea></div>
+  
+    <button class="btn btn-info bld" style="margin-top:40px;margin-left:42%;width:20%" >Submit</button>
+    
+     </form>
+</div>
+
+</div>
+
+</div>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script type="text/javascript">
+
+</script>
+
+
+<script>
+
+
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 3000);
+});
+</script>
+
+
+  </body>
+</html>

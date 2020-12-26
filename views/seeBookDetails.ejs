@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        
+        <title>
+            BMS
+        </title>
+        <style>
+            body{
+                background:#f1f1f1;
+            }
+            
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px 10px;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+.fa:hover {
+    opacity: 0.7;
+}
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+.icc{
+ width:35px;height:35px;
+}
+.icc:hover{
+ opacity:0.6;
+}
+.sBlog:hover{
+        box-shadow: 6px 8px 8px 6px rgba(0,0,0,0.9);   
+       }
+       .mainNew:hover{
+           background:rgba(255,255,255,0.9);
+       }
+ .sBlog{
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+ .mainNew{
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ }
+ 
+.list-wrapper {
+	padding: 15px;
+	overflow: hidden;
+}
+
+.list-item {
+	border: 1px solid #EEE;
+	background: #FFF;
+	margin-bottom: 10px;
+	padding: 10px;
+	box-shadow: 0px 0px 10px 0px #EEE;
+}
+
+.list-item h4 {
+	color: #FF7182;
+	font-size: 18px;
+	margin: 0 0 5px;	
+}
+
+.list-item p {
+	margin: 0;
+}
+        </style>
+    </head>
+    <body>
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+           <a class="navbar-brand" href="/home"><strong>Book Management System</strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/home">Add Book<span class="sr-only">(current)</span></a>
+      </li>
+	 
+	 <li class="nav-item">
+        <a class="nav-link" href="/maindisease">My Books</a>
+      </li>
+
+	  
+    </ul>
+    <form class="form-inline my-2 my-lg-0 ">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  
+    </form>
+	
+	<% if(!currentUser){ %>
+            <a class="btn btn-primary" href="/login" role="button">Login</a>
+            <%} else{ %>
+            <a href="/profilenav"  style="color:#ffffff;margin-right:18px"> <%= currentUser.name %></a>
+            <a class="btn btn-info" href="/logout" role="button">Logout</a>
+            
+            <% } %>
+	
+  </div>
+
+        </div>
+ </nav>
+ 
+ <% if(error.length>0){%>
+<div class="alert alert-danger container" style="margin-top:0px;"><%=error%></div>
+<% }if(success.length>0){%>
+<div class="alert alert-success container" style="margin-top:0px;"><%=success%></div>
+<% } %> 
+
+<div class="container">
+    <div class="row" style="margin-top:5em;margin-bottom:5em;background:#ffffff;">
+  <div class="col-sm-6" style="padding-left:0px">
+    <img class="card-img" src="https://res.cloudinary.com/bookbub/image/upload/t_ci_ar_6:9_scaled,f_auto,q_auto,dpr_1,c_scale,w_405/v1608562098/pro_pbid_767409.jpg" alt="Card image"/  >
+  </div>
+  <div class="col-sm-6">
+    <div class="card-body-right" style="margin-top:2em">
+        <form action="/updatebook/<%= bookk._id %>?_method=DELETE" method="POST">
+        <button  class="btn btn-danger" >Delete Book</button>
+    </form>
+          <form action="/updatebook/<%= bookk._id %>" method="GET">
+        <button  class="btn btn-info" >Edit Book</button></td>
+    
+    </form>
+      <h1 class="card-title">John Doe</h1>
+      
+      <h4 class="card-title" style="opacity:0.8">Published On: 2020-21-44</h4>
+      <h4 class="card-title" style="opacity:0.8" >Price: Rs.1800</h4>
+        
+     
+      <p class="card-text" style="font-size:19px">Some example text some example text. John Doe is an architect and engineer
+      Some example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineerSome example text some example text. John Doe is an architect and engineer Some example text some example text. John Doe is an architect and engineer Some example text some example text. John Doe is an architect and engineer Some example text some example text. John Doe is an architect and engineer</p>
+      <h4 class="card-title" >By: Chetan Bhagat</h4>
+    
+     
+    </div>
+     </div>
+  </div> 
+  </div>
+</div>
+
+        <footer class="page-footer font-small pt-4" style="background:#343a40">
+
+  <div class="container-fluid text-center text-md-left">
+
+    <div class="row">
+
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <h5 class="text-uppercase text-light" style="margin-left:2%"> Book Management System</h5>
+        
+        <br>
+		
+		 <a href="#" style="color:#ffffff;font-size:18px;margin-left:2%"><i class="fas fa-envelope fa-sm"></i> bms@gmail.com </a>
+		 <br>
+		 
+		  <a href="#" style="margin-left:2%" ><img src="https://cdn.icon-icons.com/icons2/1826/PNG/512/4202110facebooklogosocialsocialmedia-115707_115594.png" class="icc"></a>
+  <a href="#"><img src="https://cdn2.iconfinder.com/data/icons/simple-social-media-shadow/512/14-512.png" class="icc" style="width:65px;height:65px"></a>
+  <a href="#"><img src="https://assets.stickpng.com/images/580b57fcd9996e24bc43c545.png" class="icc"> </a>
+  
+
+      </div>
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+      <div class="col-md-3 mb-md-0 mb-3 col-lg-3" style="margin-top:1em">
+
+
+        <ul class="list-unstyled">
+             <li style="margin-bottom:10px">
+            <a href="/home" style="color:#ffffff;"><b>Home</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/addbook" style="color:#ffffff;"><b>Add Book</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/mybooks" style="color:#ffffff;"><b>My Books</b></a>
+          </li>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-3 mb-md-0 mb-3 col-lg-3" style="margin-top:1em">
+
+        <ul class="list-unstyled">
+          <li style="margin-bottom:10px">
+            <a href="/" style="color:#ffffff;"><b>Login In</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/signup" style="color:#ffffff;"><b>Sign Up</b></a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
+    </body>
+</html>

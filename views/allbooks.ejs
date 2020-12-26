@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <title>BMS</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <style>
+        body{
+           background-color: #7fcec5;
+background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+        }
+          table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+}
+
+td{
+  border: 1px solid #dddddd;
+  padding: 12px;
+}
+th {
+  border: 1px solid #dddddd;
+  
+  padding: 14px;
+background:#ffffff;
+}
+
+tr:nth-child(even) {
+  background-color: #f1f1f1;
+}
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+          
+        </style>
+    </head>
+    <body>
+             
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+           <a class="navbar-brand" href="/home"><strong>Book Management System</strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/home">Add Book<span class="sr-only">(current)</span></a>
+      </li>
+	  
+    
+	 
+	 <li class="nav-item">
+        <a class="nav-link" href="/maindisease">My Books</a>
+      </li>
+
+	  
+    </ul>
+    <form class="form-inline my-2 my-lg-0 ">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  
+    </form>
+	
+	<% if(!currentUser){ %>
+            <a class="btn btn-primary" href="/login" role="button">Login</a>
+            <%} else{ %>
+            <a href="/profilenav"  style="color:#ffffff;margin-right:18px"> <%= currentUser.name %></a>
+            <a class="btn btn-info" href="/logout" role="button">Logout</a>
+            
+            <% } %>
+	
+  </div>
+
+        </div>
+ </nav>
+ 
+ <% if(error.length>0){%>
+<div class="alert alert-danger container" style="margin-top:0px;"><%=error%></div>
+<% }if(success.length>0){%>
+<div class="alert alert-success container" style="margin-top:0px;"><%=success%></div>
+<% } %> 
+
+<table style="margin:10%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:2%;margin-bottom:15%;margin-top:8%">
+  <tr>
+    <th>Name</th>
+    <th>Author</th>
+    <th>Published</th>
+    <th>Description</th>
+    <th style="width:15%">Operations</th>
+  </tr>
+  
+  <% allbooks.forEach(function(b){ %>
+  <tr>
+    <td><%= b.name %></td>
+    <td><%= b.author %></td>
+    <td><%= b.published %></td>
+    <td><%= b.description %></td>
+    <td>
+      <form action="/updatebook/<%= b._id %>?_method=DELETE" method="POST">
+        <button  class="btn btn-danger" >Delete</button>
+    </form>
+    <form action="/updatebook/<%= b._id %>" method="GET">
+        <button  class="btn btn-info" >Edit</button></td>
+    
+    </form>
+    
+  </tr>
+  <% })%>
+  
+</table>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 3000);
+});
+    </script>
+    </body>
+</html>

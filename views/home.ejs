@@ -1,0 +1,285 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        
+        <title>
+            Book Management System
+        </title>
+        <style>
+        body{
+        background-color: #f6f6f6;
+background-image: linear-gradient(315deg, #f6f6f6 0%, #e9e9e9 74%);
+        }
+          .carousel-item {
+      height: 500px;
+      }
+
+.item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-height: 500px;
+}
+.crd:hover{
+  transform: translate3D(0,-1px,0) scale(1.03);
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all .4s ease
+}
+.crd{
+  
+box-shadow: 10px 5px 5px lightgrey;
+height:100%;
+
+}
+        </style>
+    </head>
+    <body>
+        
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+           <a class="navbar-brand" href="/home"><strong>Book Management System</strong></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/home">Add Book<span class="sr-only">(current)</span></a>
+      </li>
+	  
+    
+	 
+	 <li class="nav-item">
+        <a class="nav-link" href="/maindisease">My Books</a>
+      </li>
+
+	  
+    </ul>
+    <form class="form-inline my-2 my-lg-0 " >
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	  
+    </form>
+	
+	<% if(!currentUser){ %>
+            <a class="btn btn-primary" href="/login" role="button">Login</a>
+            <%} else{ %>
+            <a href="/profilenav"  style="color:#ffffff;margin-right:18px"> <%= currentUser.username %></a>
+            <a class="btn btn-info" href="/logout" role="button">Logout</a>
+            
+            <% } %>
+	
+  </div>
+
+        </div>
+ </nav>
+ 
+ <% if(error.length>0){%>
+<div class="alert alert-danger container" style="margin-top:0px;"><%=error%></div>
+<% }if(success.length>0){%>
+<div class="alert alert-success container" style="margin-top:0px;"><%=success%></div>
+<% } %> 
+ 
+ <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.washingtonpost.com/graphics/entertainment/2016-best-books/img/best-books-2016-promo.jpg">
+    </div>
+    <div class="carousel-item">
+      <img src="https://i.pinimg.com/564x/40/23/06/402306fe012d33956c26e3892d22cab4.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://i.pinimg.com/564x/40/23/06/402306fe012d33956c26e3892d22cab4.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+      <div class="container" >
+        <div class="row"> 
+        
+        <% all.forEach(function(al){ %>
+         <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+           
+        <a href="/seeBookDetails/<%= al._id %>" style="text-decoration:None;color:#000000">
+             <div class="card" style="border-radius:2px">
+                <img src="https://res.cloudinary.com/bookbub/image/upload/t_ci_ar_6:9_scaled,f_auto,q_auto,dpr_1,c_scale,w_405/v1608562098/pro_pbid_767409.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          </a>
+          </div>
+          
+          <% }) %>
+          
+        <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+           <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+          
+          <div class="col col-12 col-sm-12 col-md-12 col-xl-3 col-lg-3 crd "  style="margin:1.5em;padding:0px">
+             <div class="card" style="border-radius:2px">
+                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg" class="card-img-top">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align: left;">Card title
+                    <span style="float: right;">Price</h6>
+                    </span>
+              <hr>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                 <h6 style="opacity:0.8">By: Chetan Bhagat</h6>
+               </div>
+          </div>
+          
+          </div>
+      </div>
+      </div>
+      
+     
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 3000);
+});
+    </script>
+    
+    </body>
