@@ -6,7 +6,7 @@ var User=require("./models/user");
 var Book=require("./models/book");
 var flash=require("connect-flash");
 
-mongoose.connect("mongodb://localhost/BMS_v3",{useNewUrlParser: true});
+mongoose.connect("mongodb+srv://anantha28:anantha28@cluster1.nsdc3.mongodb.net/anantha28?retryWrites=true&w=majority",{useNewUrlParser: true});
 var passport=require("passport");
 var localStrategy=require("passport-local");
 var methodOverride=require("method-override");
@@ -74,6 +74,7 @@ app.get("/home",(req,res)=>{
         if(err)
         console.log(err);
         else{
+            all.reverse();
         res.render("home.ejs",{all:all});
         }
     });
