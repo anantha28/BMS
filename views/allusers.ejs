@@ -1,84 +1,41 @@
 <html>
     <head>
+        <title>BMS</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        
-        <title>
-            BMS
-        </title>
         <style>
-            body{
-                background:#f1f1f1;
-            }
-            
-.fa {
-  padding: 20px;
-  font-size: 30px;
-  width: 50px;
-  text-align: center;
-  text-decoration: none;
-  margin: 10px 10px;
-}
-.fa-facebook {
-  background: #3B5998;
-  color: white;
-}
-.fa:hover {
-    opacity: 0.7;
-}
-.fa-linkedin {
-  background: #007bb5;
-  color: white;
-}
-.fa-youtube {
-  background: #bb0000;
-  color: white;
-}
-.icc{
- width:35px;height:35px;
-}
-.icc:hover{
- opacity:0.6;
-}
-.sBlog:hover{
-        box-shadow: 6px 8px 8px 6px rgba(0,0,0,0.9);   
-       }
-       .mainNew:hover{
-           background:rgba(255,255,255,0.9);
-       }
- .sBlog{
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
- }
- .mainNew{
-   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
- }
- 
-.list-wrapper {
-	padding: 15px;
-	overflow: hidden;
+        body{
+           background-color: #7fcec5;
+background-image: linear-gradient(315deg, #7fcec5 0%, #14557b 74%);
+        }
+          table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
 }
 
-.list-item {
-	border: 1px solid #EEE;
-	background: #FFF;
-	margin-bottom: 10px;
-	padding: 10px;
-	box-shadow: 0px 0px 10px 0px #EEE;
+td{
+  border: 1px solid #dddddd;
+  padding: 12px;
+}
+th {
+  border: 1px solid #dddddd;
+  
+  padding: 14px;
+background:#ffffff;
 }
 
-.list-item h4 {
-	color: #FF7182;
-	font-size: 18px;
-	margin: 0 0 5px;	
+tr:nth-child(even) {
+  background-color: #f1f1f1;
 }
-
-.list-item p {
-	margin: 0;
+tr:nth-child(odd) {
+  background-color: #ffffff;
 }
+          
         </style>
     </head>
     <body>
-        
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+             
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
            <a class="navbar-brand" href="/home"><strong>Book Management System</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,42 +78,35 @@
 <div class="alert alert-success container" style="margin-top:0px;"><%=success%></div>
 <% } %> 
 
-<div class="container">
-    <div class="row" style="margin-top:5em;margin-bottom:5em;background:#ffffff;">
-  <div class="col-sm-6" style="padding-left:0px">
-    <img class="card-img" src="<%= bookk.bookImage %>" alt="Card image"/  >
-  </div>
-  <div class="col-sm-6">
-    <div class="card-body-right" style="margin-top:2em">
-      
-      <% if(currentUser.admin===true || (bookk.userId.toString())===((currentUser._id).toString())) { %>
-      
-        <form action="/updatebook/<%= bookk._id %>?_method=DELETE" method="POST">
-        <button  class="btn btn-danger" >Delete Book</button>
-    </form>
-          <form action="/updatebook/<%= bookk._id %>" method="GET">
-        <button  class="btn btn-info" >Edit Book</button></td>
-    
-    </form>
-    <% } %>
-    
-      <h1 class="card-title"><%= bookk.name %></h1>
-      
-      <h4 class="card-title" style="opacity:0.8">Published On: <%= bookk.published %></h4>
-      <h4 class="card-title" style="opacity:0.8" >Price: Rs.<%= bookk.price %></h4>
-        
-     
-      <p class="card-text" style="font-size:19px"><%= bookk.description %>
-      </p>
-      <h4 class="card-title" >By: <%= bookk.author %></h4>
-    
-    </div>
-     </div>
-  </div> 
-  </div>
-</div>
 
-<footer class="page-footer font-small pt-4" style="background:#343a40;margin-top:80px">
+<table style="margin:10%;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);margin-top:2%;margin-bottom:15%;margin-top:8%">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Age</th>
+    <th>User Type</th>
+  </tr>
+  
+  <% users.forEach(function(b){ %>
+  <tr>
+    <td><%= b.name %></td>
+    <td><%= b.username %></td>
+    <td><%= b.age %></td>
+    <% if(b.admin){ %>
+    <td><strong>Admin</strong></td>
+    <% }else{ %>
+    <td>
+    <form action="/makeadmin/<%= b._id %>" method="GET">
+        <button  class="btn btn-info" >Make Admin</button>
+    </form>
+    </td>
+     <% } %>
+  </tr>
+  <% })%>
+  
+</table>
+
+<footer class="page-footer font-small pt-4" style="background:#343a40;margin-top:280px">
 
   <div class="container-fluid text-center text-md-left">
 
@@ -215,6 +165,13 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  
+    <script type="text/javascript">
+$(document).ready(function() {
+    // show the alert
+    setTimeout(function() {
+        $(".alert").alert('close');
+    }, 3000);
+});
+    </script>
     </body>
 </html>

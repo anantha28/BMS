@@ -6,7 +6,7 @@ var User=require("./models/user");
 var Book=require("./models/book");
 var flash=require("connect-flash");
 
-mongoose.connect("mongodb://localhost/BMS_v2",{useNewUrlParser: true});
+mongoose.connect("mongodb://localhost/BMS_v3",{useNewUrlParser: true});
 var passport=require("passport");
 var localStrategy=require("passport-local");
 var methodOverride=require("method-override");
@@ -62,6 +62,7 @@ app.use(function(req,res,next)
 app.get("/",(req,res)=>{
    res.render("login.ejs");
 });
+
 app.get("/logout",function(req,res){
    req.logout();
    req.flash("success","Successfully logged you out");
@@ -126,9 +127,8 @@ app.post("/signup",function(req,res)
             users.phoneNumber=req.body.phoneNumber;
             users.age=req.body.age;
             users.name=req.body.name;
-            if(users.username==='admin'){
-            users.writearticle=true;
-            users.writenews=true;
+            if(users.username==='admin@gmail.com'){
+            users.admin=true;
             }
             users.save();
            req.flash("success","Welcome "+users.name);
@@ -136,6 +136,10 @@ app.post("/signup",function(req,res)
        });
         }
     });
+});
+
+app.get("/login",(req,res)=>{
+   res.render("login.ejs");
 });
 
 app.get("/mybooks",isLoggedIn,(req,res)=>{
@@ -189,7 +193,7 @@ app.delete("/updatebook/:id",isLoggedIn,(req,res)=>{
         }
     });
 });
-app.get("/seeBookDetails/:id",(req,res)=>{
+app.get("/seeBookDetails/:id",isLoggedIn,(req,res)=>{
     var id=req.params.id;
     Book.findById(id,(err,bookk)=>{
         if(err)
@@ -202,12 +206,39 @@ app.get("/seeBookDetails/:id",(req,res)=>{
 
 /*----------------------Admin Routes----------------------------------------*/
 
-app.get("/allbooks",(req,res)=>{
+app.get("/allbooks",isAdminLoggedIn,(req,res)=>{
     Book.find({},(err,allbooks)=>{
         if(err)
         console.log(err);
         else{
             res.render("allbooks.ejs",{allbooks:allbooks});
+        }
+    });
+});
+app.get("/admin/dashboard",isAdminLoggedIn,(req,res)=>{
+    res.render("adminDashboard.ejs");
+});
+
+app.get("/allusers",isAdminLoggedIn,(req,res)=>{
+    User.find({},(err,users)=>{
+        if(err)
+        console.log(err);
+        else{
+            res.render("allusers.ejs",{users:users});
+        }
+    });
+});
+
+app.get("/makeadmin/:id",(req,res)=>{
+    var id =req.params.id;
+    User.findById(id,(err,foundUser)=>{
+        if(err)
+        console.log(err);
+        else{
+            foundUser.admin=true;
+            foundUser.save();
+            req.flash("success","User made Admin Successfully");
+            res.redirect("/allusers");
         }
     });
 });
@@ -221,6 +252,23 @@ function isLoggedIn(req,res,next){
      req.flash("error","Please login,Don't have an account? Please Sign Up");
     res.redirect("/");
    
+}
+function isAdminLoggedIn(req,res,next){
+    if(req.isAuthenticated() )
+    {   
+        if(req.user.admin===true)
+        return next();
+        else{
+             req.flash("error","You don't have the permission to do Admin Operations");
+            res.redirect("/home");
+        }
+    }
+    else{
+        
+     req.flash("error","Please login,Don't have an account? Please Sign Up");
+    res.redirect("/");
+   
+    }
 }
 
 app.listen(process.env.PORT,process.env.IP,function(){

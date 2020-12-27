@@ -41,7 +41,7 @@
   </head>
   
   <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
            <a class="navbar-brand" href="/home"><strong>Book Management System</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,26 +51,24 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/home">Add Book<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/addbook">Add Book<span class="sr-only">(current)</span></a>
       </li>
-	  
-    
 	 
 	 <li class="nav-item">
-        <a class="nav-link" href="/maindisease">My Books</a>
+        <a class="nav-link" href="/mybooks">My Books</a>
+      </li>
+      
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/dashboard">Admin Dashboard</a>
       </li>
 
 	  
     </ul>
-    <form class="form-inline my-2 my-lg-0 " >
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-	  
-    </form>
 	
 	<% if(!currentUser){ %>
             <a class="btn btn-primary" href="/login" role="button">Login</a>
             <%} else{ %>
-            <a href="/profilenav"  style="color:#ffffff;margin-right:18px"> <%= currentUser.username %></a>
+            <a href="#"  style="color:#ffffff;margin-right:18px"> <%= currentUser.name %></a>
             <a class="btn btn-info" href="/logout" role="button">Logout</a>
             
             <% } %>
@@ -127,6 +125,64 @@
 </div>
 
 </div>
+
+<footer class="page-footer font-small pt-4" style="background:#343a40;margin-top:80px">
+
+  <div class="container-fluid text-center text-md-left">
+
+    <div class="row">
+
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <h5 class="text-uppercase text-light" style="margin-left:2%"> Book Management System</h5>
+        
+        <br>
+		
+		 <a href="#" style="color:#ffffff;font-size:18px;margin-left:2%"><i class="fas fa-envelope fa-sm"></i> bms@gmail.com </a>
+		 <br>
+		 
+
+      </div>
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+      <div class="col-md-3 mb-md-0 mb-3 col-lg-3" style="margin-top:1em">
+
+
+        <ul class="list-unstyled">
+             <li style="margin-bottom:10px">
+            <a href="/home" style="color:#ffffff;"><b>Home</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/addbook" style="color:#ffffff;"><b>Add Book</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/mybooks" style="color:#ffffff;"><b>My Books</b></a>
+          </li>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-md-3 mb-md-0 mb-3 col-lg-3" style="margin-top:1em">
+
+        <ul class="list-unstyled">
+          <li style="margin-bottom:10px">
+            <a href="/" style="color:#ffffff;"><b>Login In</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/signup" style="color:#ffffff;"><b>Sign Up</b></a>
+          </li>
+          <li style="margin-bottom:10px">
+            <a href="/admin/dashboard" style="color:#ffffff;"><b>Admin Dashboard</b></a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
 <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
 <script type="text/javascript">
 
